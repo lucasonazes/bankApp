@@ -6,10 +6,6 @@ public class Bank {
     private ArrayList<Account> accounts = new ArrayList<Account>();
     private String name;
 
-    public Bank(String name) {
-        this.name = name;
-    }
-
     public void addAccount(Account account) {
         this.accounts.add(account);
     }
