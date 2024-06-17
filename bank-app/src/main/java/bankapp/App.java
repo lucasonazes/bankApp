@@ -6,10 +6,11 @@ public class App
 {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            @SuppressWarnings("unused")
             @Override
             public void run() {
-                Front front = new Front();
-                // BankController controller = new BankController(front);
+                BankView front = new BankView();
+                BankController controller = new BankController(front);
                 front.setVisible(true);
             }
         });
