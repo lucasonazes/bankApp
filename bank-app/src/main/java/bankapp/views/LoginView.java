@@ -1,42 +1,23 @@
-package bankapp;
+package bankapp.views;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * A classe BankView cria a interface gráfica para gerenciar uma conta bancária.
- */
-public class BankView extends JFrame {
+public class LoginView extends JFrame {
     private JPanel panel;
     private GridBagConstraints gbc;
     private JTextField user;
     private JTextField password;
     private JButton loginButton;
 
-    /**
-     * Construtor que inicializa a interface gráfica
-     */
-    public BankView() {
-        initComponents();
-        login(); // Inicializa os componentes de login
-    }
-
-    /**
-     * Método para inicializar os componentes da interface gráfica.
-     */
-    private void initComponents() {
-        setTitle("Gerenciador de Contas Bancárias");
+    public LoginView() {
+        setTitle("Realizar Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
-    }
 
-    /**
-     * Tela de Login
-     */
-    private void login() {
         setSize(600, 300);
 
         gbc.insets = new Insets(10, 10, 10, 10);

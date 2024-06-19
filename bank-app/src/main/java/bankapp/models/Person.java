@@ -1,4 +1,4 @@
-package bankapp;
+package bankapp.models;
 
 public class Person {
     protected String name;

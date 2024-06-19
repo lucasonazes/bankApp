@@ -1,4 +1,4 @@
-package bankapp;
+package bankapp.models;
 
 public class SavingsAccount extends Account {
     private double income = 1.005;

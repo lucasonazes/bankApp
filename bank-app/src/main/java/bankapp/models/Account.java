@@ -1,4 +1,4 @@
-package bankapp;
+package bankapp.models;
 
 public class Account {
     private static int globalNumber = -1;
