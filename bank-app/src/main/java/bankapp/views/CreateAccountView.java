@@ -1,18 +1,20 @@
 package bankapp.views;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
-public class LoginView extends JFrame {
+public class CreateAccountView extends JFrame{
     private JPanel panel;
     private GridBagConstraints gbc;
     private JTextField user;
     private JTextField password;
-    private JButton loginButton;
+    private JTextField ownerName;
+    private JTextField ownerCpf;
+    private JButton createAccountButton;
 
-    public LoginView() {
-        setTitle("Realizar Login");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public CreateAccountView() {
+        setTitle("Criar Conta");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
@@ -25,10 +27,26 @@ public class LoginView extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        panel.add(new JLabel("REALIZAR LOGIN"), gbc);
+        panel.add(new JLabel("CRIAR CONTA"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
+        panel.add(new JLabel("NOME PROPRIETÁRIO:"), gbc);
+
+        gbc.gridx = 2;
+        ownerName = new JTextField(10);
+        panel.add(ownerName, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(new JLabel("CPF PROPRIETÁRIO:"), gbc);
+
+        gbc.gridx = 2;
+        ownerCpf = new JTextField(10);
+        panel.add(ownerCpf, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         panel.add(new JLabel("USUÁRIO:"), gbc);
 
         gbc.gridx = 2;
@@ -36,7 +54,7 @@ public class LoginView extends JFrame {
         panel.add(user, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 4;
         panel.add(new JLabel("SENHA:"), gbc);
 
         gbc.gridx = 2;
@@ -44,9 +62,9 @@ public class LoginView extends JFrame {
         panel.add(password, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 3;
-        loginButton = new JButton("ENTRAR");
-        panel.add(loginButton, gbc);
+        gbc.gridy = 5;
+        createAccountButton = new JButton("CRIAR CONTA");
+        panel.add(createAccountButton, gbc);
 
         add(panel);
     }
@@ -55,15 +73,23 @@ public class LoginView extends JFrame {
         JOptionPane.showMessageDialog(this, message);
     }
 
-    public JButton getLoginButton() {
-        return this.loginButton;
-    }
-
     public String getUser() {
         return this.user.getText();
     }
 
     public String getPassword() {
         return this.password.getText();
+    }
+
+    public String getOwnerName() {
+        return this.ownerName.getText();
+    }
+    
+    public String getOwnerCpf() {
+        return this.ownerCpf.getText();
+    }
+
+    public JButton getCreateAccountButton() {
+        return this.createAccountButton;
     }
 }

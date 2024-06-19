@@ -43,7 +43,6 @@ public class ManageAccountView extends JFrame{
         panel.add(exitButton, gbc);
 
         add(panel);
-        setVisible(true);
     }
 
     public void showMessage(String message) {
