@@ -9,7 +9,7 @@ public class SetAccountTypeView extends JFrame{
     private JButton currentAccountButton;
     private JButton savingsAccountButton;
 
-    public void setAccountType() {
+    public SetAccountTypeView() {
         setTitle("Criar Conta");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -28,10 +28,17 @@ public class SetAccountTypeView extends JFrame{
         panel.add(currentAccountButton, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 0;
         savingsAccountButton = new JButton("CONTA POUPANÇA");
         panel.add(savingsAccountButton, gbc);
 
         add(panel);
+    }
+
+    public JButton getCurrentAccountButton() {
+        return this.currentAccountButton;
+    }
+
+    public JButton getSavingsAccountButton() {
+        return this.savingsAccountButton;
     }
 }
