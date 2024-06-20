@@ -5,6 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import bankapp.models.Account;
+import bankapp.models.CurrentAccount;
+import bankapp.models.Person;
+import bankapp.models.SavingsAccount;
 
 public class Database {
     // private static final String USER = "root";
@@ -13,7 +19,6 @@ public class Database {
     private static final String USER = "lucas";
     private static final String PASSWORD = "@8800MySQLof";
     private Connection connection = null;
-    public ResultSet result = null;
 
     public void connect() { 
         try {
@@ -91,5 +96,69 @@ public class Database {
         disconnect();
     }
 
+    public ArrayList<Account> getAccounts() throws SQLException {
+        connect();
+
+        ArrayList<Account> accounts = new ArrayList<Account>();
+        Statement statement = connection.createStatement();
+        String select = "SELECT * FROM ACCOUNTS";
+
+        ResultSet result = statement.executeQuery(select);
+
+        while (result.next()) {
+            String user = result.getString("ACCOUNT_USER");
+            String password = result.getString("ACCOUNT_PASSWORD");
+            String ownerName = result.getString("OWNER_NAME");
+            String ownerCpf = result.getString("OWNER_CPF");
+            String ownerRole = result.getString("OWNER_ROLE");
+            double balance = result.getDouble("BALANCE");
+            String accountType = result.getString("ACCOUNT_TYPE");
+            double cdb = result.getDouble("CDB");
+            double previousIncome = result.getDouble("PREVIOUS_INCOME");
+            double totalIncome = result.getDouble("TOTAL_INCOME");
+
+            Account account;
+            String uppercaseType = accountType.toUpperCase();
+            if (uppercaseType.equals("CURRENT")) {
+                account = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
+            } else {
+                account = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, balance);
+            }
+
+            accounts.add(account);
+        }
+
+        disconnect();
+        return accounts;
+    }
+
+    public ArrayList<Person> getPeople() throws SQLException {
+        connect();
+
+        ArrayList<Person> people = new ArrayList<Person>();
+        Statement statement = connection.createStatement();
+
+        disconnect();
+        return people;
+    }
+
+    public int getLastAccountNumber() throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String select = "SELECT * FROM ACCOUNTS";
+
+        ResultSet result = statement.executeQuery(select);
+
+        int last = 0;
+
+        while (result.next()) {
+            int accountNumber = result.getInt("ACCOUNT_NUMBER");
+            if (accountNumber > last) last = accountNumber;
+        }
+
+        disconnect();
+        return last;
+    }
 }
 
