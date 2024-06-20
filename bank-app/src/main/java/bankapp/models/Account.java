@@ -1,12 +1,12 @@
 package bankapp.models;
 
 public class Account {
-    private static int globalNumber = -1;
+    private static int globalNumber = 1;
     protected int accountNumber;
     protected double balance = 0;
     protected Person owner;
-    protected double depositLimit = 1500;
 
+    @SuppressWarnings("static-access")
     public Account(Person person) {
         this.globalNumber = this.globalNumber + 1;
         this.accountNumber = this.globalNumber;
@@ -24,9 +24,7 @@ public class Account {
     }
 
     public void deposit(double value) {
-        if (this.depositLimit < value) {
-            System.out.println("Your deposit is above the limit. The current deposit limit is: " + this.depositLimit);
-        } else if (value <= 0) {
+        if (value <= 0) {
             System.out.println("Invalid value.");
         } else {
             this.balance += value;
@@ -43,11 +41,6 @@ public class Account {
             this.balance -= value;
             System.out.println("Your withDraw was made sucessfully, your new balance is: " + this.balance);
         }
-    }
-
-    public void depositLimit(double limit) {
-        this.depositLimit = limit;
-        System.out.println("Deposit limit changed sucessfuly. Your new deposit limit is ");
     }
 
     public Person getOwner() {

@@ -8,7 +8,7 @@ import bankapp.views.SetAccountTypeView;
 
 public class CreateAccountController {
     private SetAccountTypeView setAccountTypeView;
-    private CreateAccountView createAccountView;
+    private CreateAccountView createAccountView = new CreateAccountView();
     private String type = null;
 
     public CreateAccountController() {
@@ -30,16 +30,25 @@ public class CreateAccountController {
                 savingsAccount();
             }
         });
+
+        this.createAccountView.getCreateAccountButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createAccount();
+            }
+        });
+    }
+
+    public void createAccount() {
+        createAccountView.showMessage("Conta criada com sucesso!");
     }
 
     public void currentAccount() {
-        CreateAccountView createAccountView = new CreateAccountView();
         createAccountView.setVisible(true);
         this.type = "current";
     }
 
     public void savingsAccount() {
-        CreateAccountView createAccountView = new CreateAccountView();
         createAccountView.setVisible(true);
         this.type = "savings";
     }

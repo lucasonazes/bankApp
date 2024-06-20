@@ -4,12 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import bankapp.database.Database;
 import bankapp.views.ManageAccountView;
 
 public class ManageAccountController {
     private ManageAccountView view;
-    private Database database = new Database();
 
     public ManageAccountController() {
         view = new ManageAccountView();
@@ -75,7 +73,7 @@ public class ManageAccountController {
     }
 
     private void deletePerson() throws SQLException {
-        database.showPerson();
+        new DeletePersonController();
     }
 
     private void deleteAccount() {

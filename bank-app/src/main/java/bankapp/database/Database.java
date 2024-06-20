@@ -13,7 +13,6 @@ public class Database {
     private static final String USER = "lucas";
     private static final String PASSWORD = "@8800MySQLof";
     private Connection connection = null;
-    public Statement statement = null;
     public ResultSet result = null;
 
     public void connect() { 
@@ -42,25 +41,55 @@ public class Database {
         }
     }
 
-    public void showPerson() throws SQLException {
+    public void addPerson(String name, String cpf, String role) throws SQLException {
         connect();
 
-        statement = connection.createStatement();
-
-        String select = "SELECT * FROM PERSON";
-
-        result = statement.executeQuery(select);
-
-        while (result.next()) {
-            String name = result.getString("PERSON_NAME");
-            String role = result.getString("PERSON_ROLE");
-            String cpf = result.getString("CPF");
-            System.out.println("NOME: " + name);
-            System.out.println("CPF: " + cpf);
-            System.out.println("CARGO: " + role);
-        }
+        Statement statement = connection.createStatement();
+        String insert = "INSERT INTO PERSON (PERSON_NAME, CPF, PERSON_ROLE) VALUES (\""+name+"\",\""+cpf+"\",\""+role+"\")";
+        statement.executeUpdate(insert);
 
         disconnect();
     }
+
+    public void addAccount(String user, String password, String ownerName, String ownerCpf, double balance, String accountType, double cdb, double previousIncome, double totalIncome) throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String insert = "INSERT INTO ACCOUNTS (ACCOUNT_USER, ACCOUNT_PASSWORD, OWNER_NAME, OWNER_CPF, BALANCE, ACCOUNT_TYPE, CDB, PREVIOUS_INCOME, TOTAL_INCOME) VALUES (\""+user+"\",\""+password+"\",\""+ownerName+"\",\""+ownerCpf+"\",\""+balance+"\",\""+accountType+"\",\""+cdb+"\",\""+previousIncome+"\",\""+totalIncome+"\")";
+        statement.executeUpdate(insert);
+
+        disconnect();
+    }
+
+    public void deletePerson(String cpf) throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String delete = "DELETE FROM PERSON WHERE CPF = "+cpf;
+        statement.executeUpdate(delete);
+
+        disconnect();
+    }
+
+    public void deleteAccount(int accountNumber) throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String delete = "DELETE FROM PERSON WHERE ACCOUNT_NUMBER = "+accountNumber;
+        statement.executeUpdate(delete);
+
+        disconnect();
+    }
+    
+    public void operation(int accountNumber, double balance) throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String update = "UPDATE ACCOUNTS SET BALANCE = "+balance+" WHERE ACCOUNT_NUMBER = "+accountNumber;
+        statement.executeUpdate(update);
+
+        disconnect();
+    }
+
 }
 

@@ -22,7 +22,7 @@ public class ManageAccountView extends JFrame{
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
 
-        setSize(600, 300);
+        setSize(600, 450);
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;

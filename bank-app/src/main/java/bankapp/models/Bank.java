@@ -19,15 +19,6 @@ public class Bank {
         }
     }
 
-    public void manageAccount(int accountNumber, String method, double value) {
-        if (method == "limit") {
-            Account manageable = this.accounts.get(accountNumber);
-            manageable.depositLimit = value;
-        } else {
-            System.out.println("Invalid method");
-        }
-    }
-
     public void deleteAccount(int accountNumber) {
         this.accounts.remove(accountNumber);
         System.out.println("Account deleted sucessfuly");
