@@ -2,12 +2,14 @@ package bankapp.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-import bankapp.views.CreatePersonView;
+import bankapp.database.Database;
 import bankapp.views.ManageAccountView;
 
 public class ManageAccountController {
     private ManageAccountView view;
+    private Database database = new Database();
 
     public ManageAccountController() {
         view = new ManageAccountView();
@@ -37,7 +39,11 @@ public class ManageAccountController {
         this.view.getDeletePerson().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deletePerson();
+                try {
+                    deletePerson();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -68,8 +74,8 @@ public class ManageAccountController {
         new CreatePersonController();
     }
 
-    private void deletePerson() {
-        System.out.println("Usuário excluído!");
+    private void deletePerson() throws SQLException {
+        database.showPerson();
     }
 
     private void deleteAccount() {
