@@ -9,11 +9,13 @@ public class ManageAccountView extends JFrame{
     private GridBagConstraints gbc;
     private JButton createButton;
     private JButton manageButton;
+    private JButton createPerson;
+    private JButton deletePerson;
     private JButton deleteButton;
     private JButton exitButton;
 
     public ManageAccountView() {
-        setTitle("Gerenciar Conta");
+        setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
@@ -35,10 +37,18 @@ public class ManageAccountView extends JFrame{
         panel.add(manageButton, gbc);
 
         gbc.gridy = 2;
+        createPerson = new JButton("CADASTRAR USUÁRIO");
+        panel.add(createPerson, gbc);
+
+        gbc.gridy = 3;
+        deletePerson = new JButton("EXCLUIR USUÁRIO");
+        panel.add(deletePerson, gbc);
+
+        gbc.gridy = 4;
         deleteButton = new JButton("EXCLUIR CONTA");
         panel.add(deleteButton, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         exitButton = new JButton("SAIR");
         panel.add(exitButton, gbc);
 
@@ -55,6 +65,14 @@ public class ManageAccountView extends JFrame{
 
     public JButton getManageButton() {
         return this.manageButton;
+    }
+
+    public JButton getCreatePerson() {
+        return this.createPerson;
+    }
+
+    public JButton getDeletePerson() {
+        return this.deletePerson;
     }
 
     public JButton getDeleteButton() {

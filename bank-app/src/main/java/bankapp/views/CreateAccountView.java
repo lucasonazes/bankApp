@@ -13,7 +13,7 @@ public class CreateAccountView extends JFrame{
     private JButton createAccountButton;
 
     public CreateAccountView() {
-        setTitle("Criar Conta");
+        setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));

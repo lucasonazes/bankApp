@@ -11,7 +11,7 @@ public class LoginView extends JFrame {
     private JButton loginButton;
 
     public LoginView() {
-        setTitle("Realizar Login");
+        setTitle("Santander");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));

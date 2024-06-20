@@ -3,6 +3,7 @@ package bankapp.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import bankapp.views.CreatePersonView;
 import bankapp.views.ManageAccountView;
 
 public class ManageAccountController {
@@ -26,6 +27,20 @@ public class ManageAccountController {
             }
         });
 
+        this.view.getCreatePerson().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createPerson();
+            }
+        });
+
+        this.view.getDeletePerson().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deletePerson();
+            }
+        });
+
         this.view.getDeleteButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,11 +61,19 @@ public class ManageAccountController {
     }
 
     private void manageAccount() {
-        System.out.println("Editar Conta");
+        new OperationsController();
+    }
+
+    private void createPerson() {
+        new CreatePersonController();
+    }
+
+    private void deletePerson() {
+        System.out.println("Usuário excluído!");
     }
 
     private void deleteAccount() {
-        System.out.println("Excluir Conta");
+        System.out.println("Conta excluída!");
     }
 
     private void exitAccount() {
