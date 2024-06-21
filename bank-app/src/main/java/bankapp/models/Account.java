@@ -16,8 +16,9 @@ public class Account {
     private String type;
     protected Database database = new Database();
 
-    public Account(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance) throws SQLException {
-        this.accountNumber = database.getLastAccountNumber() + 1;
+    public Account(int accountNumber, String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance) throws SQLException {
+        
+        this.accountNumber = accountNumber;
         this.user = user;
         this.password = password;
         this.ownerName = ownerName;

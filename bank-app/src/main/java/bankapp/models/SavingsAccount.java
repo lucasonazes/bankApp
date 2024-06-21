@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 public class SavingsAccount extends Account {
 
-    public SavingsAccount(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance) throws SQLException {
-        super(user, password, ownerName, ownerCpf, ownerRole, balance);
+    public SavingsAccount(int accountNumber, String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance) throws SQLException {
+        super(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance);
         super.setType("savings");
     }
 

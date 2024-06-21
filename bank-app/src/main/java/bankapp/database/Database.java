@@ -114,6 +114,7 @@ public class Database {
         ResultSet result = statement.executeQuery(select);
 
         while (result.next()) {
+            int accountNumber = result.getInt("ACCOUNT_NUMBER");
             String user = result.getString("ACCOUNT_USER");
             String password = result.getString("ACCOUNT_PASSWORD");
             String ownerName = result.getString("OWNER_NAME");
@@ -127,9 +128,9 @@ public class Database {
 
             Account account;
             if (accountType.equals("current")) {
-                account = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
+                account = new CurrentAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
             } else {
-                account = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, balance);
+                account = new SavingsAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance);
             }
 
             accounts.add(account);
@@ -200,6 +201,7 @@ public class Database {
         ResultSet result = statement.executeQuery(select);
 
         while (result.next()) {
+            int accountNumber = result.getInt("ACCOUNT_NUMBER");
             String databaseUser = result.getString("ACCOUNT_USER");
             String databasePassword = result.getString("ACCOUNT_PASSWORD");
             String ownerName = result.getString("OWNER_NAME");
@@ -213,9 +215,9 @@ public class Database {
 
             if (databaseUser.equals(user) && databasePassword.equals(password)) {
                 if (accountType.equals("current")) {
-                    account = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
+                    account = new CurrentAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
                 } else {
-                    account = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, balance);
+                    account = new SavingsAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance);
                 }
             }
         }

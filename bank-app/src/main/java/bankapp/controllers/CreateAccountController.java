@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import bankapp.database.Database;
 import bankapp.models.CurrentAccount;
 import bankapp.models.SavingsAccount;
 import bankapp.views.CreateAccountView;
@@ -13,6 +14,7 @@ public class CreateAccountController {
     private SetAccountTypeView setAccountTypeView;
     private CreateAccountView createAccountView = new CreateAccountView();
     private String type = null;
+    private Database database = new Database();
 
     public CreateAccountController() {
         setAccountTypeView = new SetAccountTypeView();
@@ -47,6 +49,7 @@ public class CreateAccountController {
     }
 
     public void createAccount() throws SQLException {
+        int accountNumber = database.getLastAccountNumber() + 1;
         String user = createAccountView.getUser();
         String password = createAccountView.getPassword();
         String ownerName = createAccountView.getOwnerName();
@@ -54,17 +57,19 @@ public class CreateAccountController {
         String ownerRole = createAccountView.getOwnerRole();
 
         if (type == "current") {
-            CurrentAccount currentAccount = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
+            CurrentAccount currentAccount = new CurrentAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
 
             currentAccount.saveDB();
 
             createAccountView.showMessage("Conta corrente criada com sucesso!");
+            createAccountView.dispose();
         } else if (type == "savings") {
-            SavingsAccount savingsAccount = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, 0);
+            SavingsAccount savingsAccount = new SavingsAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, 0);
 
             savingsAccount.saveDB();
 
             createAccountView.showMessage("Conta poupança criada com sucesso!");
+            createAccountView.dispose();
         } else createAccountView.showMessage("Erro ao criar conta");
     }
 

@@ -8,8 +8,8 @@ public class CurrentAccount extends Account {
     private double cdb = 0;
     private double totalIncome = 0;
 
-    public CurrentAccount(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance, double previous, double cdb, double totalIncome) throws SQLException {
-        super(user, password, ownerName, ownerCpf, ownerRole, balance);
+    public CurrentAccount(int accountNumber, String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance, double previous, double cdb, double totalIncome) throws SQLException {
+        super(accountNumber, user, password, ownerName, ownerCpf, ownerRole, balance);
         super.setType("current");
         this.previous = previous;
         this.cdb = cdb;
