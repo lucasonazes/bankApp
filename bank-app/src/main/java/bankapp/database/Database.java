@@ -126,8 +126,7 @@ public class Database {
             double totalIncome = result.getDouble("TOTAL_INCOME");
 
             Account account;
-            String uppercaseType = accountType.toUpperCase();
-            if (uppercaseType.equals("CURRENT")) {
+            if (accountType.equals("current")) {
                 account = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
             } else {
                 account = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, balance);
@@ -188,9 +187,41 @@ public class Database {
         }
 
         disconnect();
-        System.out.println("Database | O número da última conta criada foi: "+last);
         return last;
     }
 
+    public Account auth(String user, String password) throws SQLException {
+        connect();
+        Account account = null;
+
+        Statement statement = connection.createStatement();
+        String select = "SELECT * FROM ACCOUNTS";
+
+        ResultSet result = statement.executeQuery(select);
+
+        while (result.next()) {
+            String databaseUser = result.getString("ACCOUNT_USER");
+            String databasePassword = result.getString("ACCOUNT_PASSWORD");
+            String ownerName = result.getString("OWNER_NAME");
+            String ownerCpf = result.getString("OWNER_CPF");
+            String ownerRole = result.getString("OWNER_ROLE");
+            double balance = result.getDouble("BALANCE");
+            String accountType = result.getString("ACCOUNT_TYPE");
+            double cdb = result.getDouble("CDB");
+            double previousIncome = result.getDouble("PREVIOUS_INCOME");
+            double totalIncome = result.getDouble("TOTAL_INCOME");
+
+            if (databaseUser.equals(user) && databasePassword.equals(password)) {
+                if (accountType.equals("current")) {
+                    account = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, balance, previousIncome, cdb, totalIncome);
+                } else {
+                    account = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, balance);
+                }
+            }
+        }
+
+        disconnect();
+        return account;
+    }
 }
 

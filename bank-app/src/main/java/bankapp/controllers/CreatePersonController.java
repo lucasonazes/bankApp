@@ -34,11 +34,14 @@ public class CreatePersonController {
         String role = view.getRole();
 
         if(role.equals("gerente")) {
-            new Manager(name, cpf);
+            Manager manager = new Manager(name, cpf);
+            manager.saveDB();
         } else if (role.equals("funcionario")) {
-            new Employee(name, cpf);
+            Employee employee = new Employee(name, cpf);
+            employee.saveDB();
         } else if (role.equals("cliente")) {
-            new Customer(name, cpf);
+            Customer customer = new Customer(name, cpf);
+            customer.saveDB();
         }
 
         view.showMessage("Usuário Cadastrado!");

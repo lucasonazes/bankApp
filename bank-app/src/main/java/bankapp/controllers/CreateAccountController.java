@@ -54,10 +54,16 @@ public class CreateAccountController {
         String ownerRole = createAccountView.getOwnerRole();
 
         if (type == "current") {
-            new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
+            CurrentAccount currentAccount = new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
+
+            currentAccount.saveDB();
+
             createAccountView.showMessage("Conta corrente criada com sucesso!");
         } else if (type == "savings") {
-            new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, 0);
+            SavingsAccount savingsAccount = new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, 0);
+
+            savingsAccount.saveDB();
+
             createAccountView.showMessage("Conta poupança criada com sucesso!");
         } else createAccountView.showMessage("Erro ao criar conta");
     }

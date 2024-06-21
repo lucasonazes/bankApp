@@ -14,7 +14,10 @@ public class CurrentAccount extends Account {
         this.previous = previous;
         this.cdb = cdb;
         this.totalIncome = totalIncome;
-        super.database.addAccount(user, password, ownerName, ownerCpf, ownerRole, balance, super.getType(), cdb, previous, totalIncome);
+    }
+
+    public void saveDB() throws SQLException {
+        super.database.addAccount(super.getUser(), super.getPassword(), super.getOwnerName(), super.getOwnerCpf(), super.getOwnerRole(), super.getBalance(), super.getType(), cdb, previous, totalIncome);
     }
 
     public void investOnCDB(double value) {

@@ -2,11 +2,17 @@ package bankapp.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import bankapp.database.Database;
+import bankapp.models.Account;
+import bankapp.models.Bank;
+import bankapp.models.Session;
 import bankapp.views.LoginView;
 
 public class LoginController {
     private LoginView view;
+    private Database database = new Database();
 
     public LoginController() {
         view = new LoginView();
@@ -15,20 +21,30 @@ public class LoginController {
         this.view.getLoginButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login();
+                try {
+                    login();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
 
-    private void login() {
+    private void login() throws SQLException {
+        Session.getInstance(null, null).clear();
         String user = view.getUser();
         String password = view.getPassword();
 
-        if(password.equals("3")) {
-            this.view.showMessage("Bem-vindo, " + user);
+        Account account = database.auth(user, password);
+
+        if (account != null) {
+            Bank bank = new Bank();
+            Session session = Session.getInstance(account, bank);
+            System.out.println("Nova sessão iniciada | Número da conta logada: "+session.getAccountNumber());
+            view.showMessage("Bem vindo, "+user);
             new ManageAccountController();
         } else {
-            view.showMessage("Senha incorreta");
+            view.showMessage("Senha ou usuário incorretos!");
             return;
         }
     }

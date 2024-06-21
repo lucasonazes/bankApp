@@ -22,9 +22,4 @@ public class Bank {
     public void addPerson(Person person) {
         this.people.add(person);
     }
-
-    public void deleteAccount(int accountNumber) {
-        this.accounts.remove(accountNumber);
-        System.out.println("Account deleted sucessfuly");
-    }
 }
