@@ -10,8 +10,10 @@ public class CreateAccountView extends JFrame{
     private JTextField password;
     private JTextField ownerName;
     private JTextField ownerCpf;
+    private JComboBox<String> ownerRole;
     private JButton createAccountButton;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public CreateAccountView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -20,7 +22,7 @@ public class CreateAccountView extends JFrame{
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
 
-        setSize(600, 300);
+        setSize(600, 450);
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
@@ -31,7 +33,7 @@ public class CreateAccountView extends JFrame{
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(new JLabel("NOME PROPRIETÁRIO:"), gbc);
+        panel.add(new JLabel("NOME USUÁRIO:"), gbc);
 
         gbc.gridx = 2;
         ownerName = new JTextField(10);
@@ -39,7 +41,7 @@ public class CreateAccountView extends JFrame{
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        panel.add(new JLabel("CPF PROPRIETÁRIO:"), gbc);
+        panel.add(new JLabel("CPF USUÁRIO:"), gbc);
 
         gbc.gridx = 2;
         ownerCpf = new JTextField(10);
@@ -47,6 +49,15 @@ public class CreateAccountView extends JFrame{
 
         gbc.gridx = 0;
         gbc.gridy = 3;
+        panel.add(new JLabel("CARGO USUÁRIO:"), gbc);
+
+        gbc.gridx = 2;
+        String[] fields = {"gerente", "funcionario", "cliente"};
+        ownerRole = new JComboBox(fields);
+        panel.add(ownerRole, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         panel.add(new JLabel("USUÁRIO:"), gbc);
 
         gbc.gridx = 2;
@@ -54,7 +65,7 @@ public class CreateAccountView extends JFrame{
         panel.add(user, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         panel.add(new JLabel("SENHA:"), gbc);
 
         gbc.gridx = 2;
@@ -62,7 +73,7 @@ public class CreateAccountView extends JFrame{
         panel.add(password, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         createAccountButton = new JButton("CRIAR CONTA");
         panel.add(createAccountButton, gbc);
 
@@ -87,6 +98,10 @@ public class CreateAccountView extends JFrame{
     
     public String getOwnerCpf() {
         return this.ownerCpf.getText();
+    }
+
+    public String getOwnerRole() {
+        return this.ownerRole.getSelectedItem().toString();
     }
 
     public JButton getCreateAccountButton() {

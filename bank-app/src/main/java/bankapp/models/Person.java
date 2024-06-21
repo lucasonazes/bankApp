@@ -1,13 +1,14 @@
 package bankapp.models;
 
+import java.sql.SQLException;
+
 public class Person {
     protected String name;
     protected String role;
     protected String cpf;
 
-    public Person(String name, String role, String cpf) {
+    public Person(String name, String cpf) throws SQLException {
         this.name = name;
-        this.role = role;
         this.cpf = cpf;
     }
 
@@ -21,5 +22,9 @@ public class Person {
 
     public String getCpf() {
         return this.cpf;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -77,7 +77,7 @@ public class ManageAccountController {
     }
 
     private void deleteAccount() {
-        System.out.println("Conta excluída!");
+        new DeleteAccountController();
     }
 
     private void exitAccount() {

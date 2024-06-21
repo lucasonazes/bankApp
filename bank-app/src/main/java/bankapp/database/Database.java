@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import bankapp.models.Account;
 import bankapp.models.CurrentAccount;
+import bankapp.models.Customer;
+import bankapp.models.Employee;
+import bankapp.models.Manager;
 import bankapp.models.Person;
 import bankapp.models.SavingsAccount;
 
@@ -54,16 +57,18 @@ public class Database {
         statement.executeUpdate(insert);
 
         disconnect();
+        System.out.println("Database | Usuário criado");
     }
 
-    public void addAccount(String user, String password, String ownerName, String ownerCpf, double balance, String accountType, double cdb, double previousIncome, double totalIncome) throws SQLException {
+    public void addAccount(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance, String accountType, double cdb, double previousIncome, double totalIncome) throws SQLException {
         connect();
 
         Statement statement = connection.createStatement();
-        String insert = "INSERT INTO ACCOUNTS (ACCOUNT_USER, ACCOUNT_PASSWORD, OWNER_NAME, OWNER_CPF, BALANCE, ACCOUNT_TYPE, CDB, PREVIOUS_INCOME, TOTAL_INCOME) VALUES (\""+user+"\",\""+password+"\",\""+ownerName+"\",\""+ownerCpf+"\",\""+balance+"\",\""+accountType+"\",\""+cdb+"\",\""+previousIncome+"\",\""+totalIncome+"\")";
+        String insert = "INSERT INTO ACCOUNTS (ACCOUNT_USER, ACCOUNT_PASSWORD, OWNER_NAME, OWNER_CPF, OWNER_ROLE, BALANCE, ACCOUNT_TYPE, CDB, PREVIOUS_INCOME, TOTAL_INCOME) VALUES (\""+user+"\",\""+password+"\",\""+ownerName+"\",\""+ownerCpf+"\",\""+ownerRole+"\","+balance+",\""+accountType+"\","+cdb+","+previousIncome+","+totalIncome+")";
         statement.executeUpdate(insert);
 
         disconnect();
+        System.out.println("Database | Conta criada");
     }
 
     public void deletePerson(String cpf) throws SQLException {
@@ -74,16 +79,18 @@ public class Database {
         statement.executeUpdate(delete);
 
         disconnect();
+        System.out.println("Database | Usuário excluído");
     }
 
     public void deleteAccount(int accountNumber) throws SQLException {
         connect();
 
         Statement statement = connection.createStatement();
-        String delete = "DELETE FROM PERSON WHERE ACCOUNT_NUMBER = "+accountNumber;
+        String delete = "DELETE FROM ACCOUNTS WHERE ACCOUNT_NUMBER = "+accountNumber;
         statement.executeUpdate(delete);
 
         disconnect();
+        System.out.println("Database | Conta excluída");
     }
     
     public void operation(int accountNumber, double balance) throws SQLException {
@@ -94,12 +101,13 @@ public class Database {
         statement.executeUpdate(update);
 
         disconnect();
+        System.out.println("Database | Operação realizada");
     }
 
     public ArrayList<Account> getAccounts() throws SQLException {
         connect();
 
-        ArrayList<Account> accounts = new ArrayList<Account>();
+        ArrayList<Account> accounts = new ArrayList<>();
         Statement statement = connection.createStatement();
         String select = "SELECT * FROM ACCOUNTS";
 
@@ -129,6 +137,7 @@ public class Database {
         }
 
         disconnect();
+        System.out.println("Database | Tabela de contas sincronizada");
         return accounts;
     }
 
@@ -137,8 +146,29 @@ public class Database {
 
         ArrayList<Person> people = new ArrayList<Person>();
         Statement statement = connection.createStatement();
+        String select = "SELECT * FROM PERSON";
+
+        ResultSet result = statement.executeQuery(select);
+
+        while (result.next()) {
+            String name = result.getString("PERSON_NAME");
+            String role = result.getString("PERSON_ROLE");
+            String cpf = result.getString("CPF");
+
+            Person person;
+            if(role.equals("manager")) {
+                person = new Manager(name, cpf);
+            } else if (role.equals("employee")) {
+                person = new Employee(name, cpf);
+            } else {
+                person = new Customer(name, cpf);
+            }
+
+            people.add(person);
+        }
 
         disconnect();
+        System.out.println("Database | Tabela de usuários sincronizada");
         return people;
     }
 
@@ -158,7 +188,9 @@ public class Database {
         }
 
         disconnect();
+        System.out.println("Database | O número da última conta criada foi: "+last);
         return last;
     }
+
 }
 

@@ -2,7 +2,10 @@ package bankapp.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import bankapp.models.CurrentAccount;
+import bankapp.models.SavingsAccount;
 import bankapp.views.CreateAccountView;
 import bankapp.views.SetAccountTypeView;
 
@@ -34,13 +37,29 @@ public class CreateAccountController {
         this.createAccountView.getCreateAccountButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createAccount();
+                try {
+                    createAccount();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
 
-    public void createAccount() {
-        createAccountView.showMessage("Conta criada com sucesso!");
+    public void createAccount() throws SQLException {
+        String user = createAccountView.getUser();
+        String password = createAccountView.getPassword();
+        String ownerName = createAccountView.getOwnerName();
+        String ownerCpf = createAccountView.getOwnerCpf();
+        String ownerRole = createAccountView.getOwnerRole();
+
+        if (type == "current") {
+            new CurrentAccount(user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
+            createAccountView.showMessage("Conta corrente criada com sucesso!");
+        } else if (type == "savings") {
+            new SavingsAccount(user, password, ownerName, ownerCpf, ownerRole, 0);
+            createAccountView.showMessage("Conta poupança criada com sucesso!");
+        } else createAccountView.showMessage("Erro ao criar conta");
     }
 
     public void currentAccount() {

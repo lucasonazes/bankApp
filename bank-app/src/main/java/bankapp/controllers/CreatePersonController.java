@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import bankapp.database.Database;
+import bankapp.models.Customer;
+import bankapp.models.Employee;
+import bankapp.models.Manager;
 import bankapp.views.CreatePersonView;
 
 public class CreatePersonController {
     private CreatePersonView view;
-    private Database database = new Database();
 
     public CreatePersonController() {
         view = new CreatePersonView();
@@ -32,7 +33,14 @@ public class CreatePersonController {
         String cpf = view.getCpf();
         String role = view.getRole();
 
-        database.addPerson(name, cpf, role);
+        if(role.equals("gerente")) {
+            new Manager(name, cpf);
+        } else if (role.equals("funcionario")) {
+            new Employee(name, cpf);
+        } else if (role.equals("cliente")) {
+            new Customer(name, cpf);
+        }
+
         view.showMessage("Usuário Cadastrado!");
     }
 }

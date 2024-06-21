@@ -11,9 +11,10 @@ public class Account {
     private String ownerName;
     private String ownerCpf;
     private String ownerRole;
+
     private double balance = 0;
     private String type;
-    private Database database = new Database();
+    protected Database database = new Database();
 
     public Account(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance) throws SQLException {
         this.accountNumber = database.getLastAccountNumber() + 1;
@@ -63,6 +64,10 @@ public class Account {
 
     public String getOwnerCpf() {
         return ownerCpf;
+    }
+
+    public String getOwnerRole() {
+        return ownerRole;
     }
 
     public double getBalance() {

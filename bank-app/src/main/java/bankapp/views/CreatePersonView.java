@@ -7,10 +7,11 @@ public class CreatePersonView extends JFrame{
     private JPanel panel;
     private GridBagConstraints gbc;
     private JTextField name;
-    private JTextField role;
+    private JComboBox<String>  role;
     private JTextField cpf;
     private JButton createPersonButton;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public CreatePersonView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,7 +50,8 @@ public class CreatePersonView extends JFrame{
         panel.add(new JLabel("CARGO:"), gbc);
 
         gbc.gridx = 2;
-        role = new JTextField(10);
+        String[] fields = {"gerente", "funcionario", "cliente"};
+        role = new JComboBox(fields);
         panel.add(role, gbc);
 
         gbc.gridx = 1;
@@ -73,7 +75,7 @@ public class CreatePersonView extends JFrame{
     }
 
     public String getRole() {
-        return this.role.getText();
+        return this.role.getSelectedItem().toString();
     }
 
     public JButton getCreatePersonButton() {

@@ -7,7 +7,7 @@ import bankapp.database.Database;
 
 public class Bank {
     private ArrayList<Account> accounts = new ArrayList<>();
-    private ArrayList<Person> people = new ArrayList<Person>();
+    private ArrayList<Person> people = new ArrayList<>();
     private Database database = new Database();
 
     public Bank() throws SQLException {

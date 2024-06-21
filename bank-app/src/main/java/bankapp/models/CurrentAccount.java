@@ -14,6 +14,7 @@ public class CurrentAccount extends Account {
         this.previous = previous;
         this.cdb = cdb;
         this.totalIncome = totalIncome;
+        super.database.addAccount(user, password, ownerName, ownerCpf, ownerRole, balance, super.getType(), cdb, previous, totalIncome);
     }
 
     public void investOnCDB(double value) {
