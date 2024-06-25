@@ -49,4 +49,16 @@ public class CurrentAccount extends Account {
 
         this.previous = this.cdb;
     }
+
+    public double getCdb() {
+        return cdb;
+    }
+
+    public double getPrevious() {
+        return previous;
+    }
+
+    public double getTotalIncome() {
+        return totalIncome;
+    }
 }

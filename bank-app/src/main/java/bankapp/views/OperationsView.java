@@ -2,6 +2,7 @@ package bankapp.views;
 
 import javax.swing.*;
 
+import bankapp.models.CurrentAccount;
 import bankapp.models.Session;
 
 import java.awt.*;
@@ -25,7 +26,7 @@ public class OperationsView extends JFrame{
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
 
-        setSize(600, 400);
+        setSize(600, 500);
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
@@ -44,14 +45,24 @@ public class OperationsView extends JFrame{
         gbc.gridy = 2;
         panel.add(new JLabel("NOME DO PROPRETÁRIO: "+session.account.getOwnerName()), gbc);
 
-        gbc.gridy = 3;
-        panel.add(new JLabel("VALOR PRÉ-RENDIMENTO: "+session.account.getBalance()), gbc);
+        // Se a conta for corrente
+        if (session.account instanceof CurrentAccount) {
+            
+            // Casting de Account para CurrentAccount
+            CurrentAccount currentAccount = (CurrentAccount) session.account;
+            double cdb = currentAccount.getCdb();
+            double previousIncome = currentAccount.getPrevious();
+            double totalIncome = currentAccount.getTotalIncome();
 
-        gbc.gridy = 4;
-        panel.add(new JLabel("RENDIMENTO TOTAL: "+session.account.getBalance()), gbc);
+            gbc.gridy = 3;
+            panel.add(new JLabel("VALOR PRÉ-RENDIMENTO: "+previousIncome), gbc);
 
-        gbc.gridy = 5;
-        panel.add(new JLabel("CBD: "+session.account.getBalance()), gbc);
+            gbc.gridy = 4;
+            panel.add(new JLabel("RENDIMENTO TOTAL: "+totalIncome), gbc);
+
+            gbc.gridy = 5;
+            panel.add(new JLabel("CBD: "+cdb), gbc);
+        }
 
         gbc.gridy = 6;
         panel.add(new JLabel("SALDO: "+session.account.getBalance()), gbc);
