@@ -70,19 +70,21 @@ public class CreateAccountController {
 
         if (type == "current") {
 
-            session.bank.addAccount(new CurrentAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0, 0, 0, 0));
+            CurrentAccount currentAccount = new CurrentAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0, 0, 0, 0);
+            session.bank.addAccount(currentAccount);
             database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta corrente criada com sucesso!");
-            session.log.info("Conta corrente criada por "+session.account.getUser());
+            session.log.info("Conta corrente de número "+currentAccount.getAccountNumber()+" criada por "+session.account.getUser());
             createAccountView.dispose();
         } else if (type == "savings") {
 
-            session.bank.addAccount(new SavingsAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0));
+            SavingsAccount savingsAccount = new SavingsAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0);
+            session.bank.addAccount(savingsAccount);
             database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta poupança criada com sucesso!");
-            session.log.info("Conta poupança criada por "+session.account.getUser());
+            session.log.info("Conta poupança de número "+savingsAccount.getAccountNumber()+" criada por "+session.account.getUser());
             createAccountView.dispose();
         } else createAccountView.showMessage("Erro ao criar conta");
     }

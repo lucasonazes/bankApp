@@ -46,17 +46,19 @@ public class CreatePersonController {
             Manager manager = new Manager(name, cpf);
             session.bank.addPerson(manager);
             database.addPerson(name, cpf, role);
+            session.log.info("Usuário de cpf "+manager.getCpf()+" cadastrado por "+session.account.getUser());
         } else if (role.equals("employee")) {
             Employee employee = new Employee(name, cpf);
             session.bank.addPerson(employee);
             database.addPerson(name, cpf, role);
+            session.log.info("Usuário de cpf "+employee.getCpf()+" cadastrado por "+session.account.getUser());
         } else if (role.equals("customer")) {
             Customer customer = new Customer(name, cpf);
             session.bank.addPerson(customer);
             database.addPerson(name, cpf, role);
+            session.log.info("Usuário de cpf "+customer.getCpf()+" cadastrado por "+session.account.getUser());
         }
 
         view.showMessage("Usuário Cadastrado!");
-        session.log.info("Usuário cadastrado");
     }
 }

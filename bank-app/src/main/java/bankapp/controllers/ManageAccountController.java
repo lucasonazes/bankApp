@@ -84,6 +84,6 @@ public class ManageAccountController {
 
     private void exitAccount() {
         this.view.dispose();
-        session.log.info("Usuário realizou logout");
+        session.log.info("Usuário "+session.account.getUser()+" realizou logout");
     }
 }
