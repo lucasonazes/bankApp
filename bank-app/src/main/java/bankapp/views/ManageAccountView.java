@@ -44,27 +44,27 @@ public class ManageAccountView extends JFrame{
         gbc.gridx = 0;
         gbc.gridy = 1;
         createButton = new JButton("CRIAR CONTA");
-        if (account.getOwnerRole().equals("gerente") || account.getOwnerRole().equals("admin")) 
+        if (account.getOwnerRole().equals("manager") || account.getOwnerRole().equals("admin")) 
         panel.add(createButton, gbc);
 
         gbc.gridy = 2;
         manageButton = new JButton("GERENCIAR CONTA");
-        if (account.getOwnerRole().equals("cliente"))
+        if (account.getOwnerRole().equals("customer"))
         panel.add(manageButton, gbc);
 
         gbc.gridy = 3;
         createPerson = new JButton("CADASTRAR USUÁRIO");
-        if (account.getOwnerRole().equals("gerente") || account.getOwnerRole().equals("admin"))
+        if (account.getOwnerRole().equals("manager") || account.getOwnerRole().equals("admin"))
         panel.add(createPerson, gbc);
 
         gbc.gridy = 4;
         deletePerson = new JButton("EXCLUIR USUÁRIO");
-        if (account.getOwnerRole().equals("gerente") || account.getOwnerRole().equals("admin"))
+        if (account.getOwnerRole().equals("manager") || account.getOwnerRole().equals("admin"))
         panel.add(deletePerson, gbc);
 
         gbc.gridy = 5;
         deleteButton = new JButton("EXCLUIR CONTA");
-        if (account.getOwnerRole().equals("gerente") || account.getOwnerRole().equals("admin"))
+        if (account.getOwnerRole().equals("manager") || account.getOwnerRole().equals("admin"))
         panel.add(deleteButton, gbc);
 
         gbc.gridy = 6;

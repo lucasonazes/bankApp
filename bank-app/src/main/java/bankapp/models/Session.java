@@ -1,5 +1,7 @@
 package bankapp.models;
 
+import java.util.ArrayList;
+
 public class Session {
     private static Session instance;
     private Account account;
@@ -27,5 +29,27 @@ public class Session {
 
     public void clear() {
         instance = null;
+    }
+
+    public boolean verifyCpf(String cpf) {
+        ArrayList<Person> people = this.bank.getPeople();
+
+        for (Person person : people) {
+            if (person.getCpf().equals(cpf)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Person getPerson(String cpf) {
+        ArrayList<Person> people = this.bank.getPeople();
+
+        for (Person person : people) {
+            if (person.getCpf().equals(cpf)) {
+                return person;
+            }
+        }
+        return null;
     }
 }

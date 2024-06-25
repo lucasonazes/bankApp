@@ -16,10 +16,6 @@ public class CurrentAccount extends Account {
         this.totalIncome = totalIncome;
     }
 
-    public void saveDB() throws SQLException {
-        super.database.addAccount(super.getUser(), super.getPassword(), super.getOwnerName(), super.getOwnerCpf(), super.getOwnerRole(), super.getBalance(), super.getType(), cdb, previous, totalIncome);
-    }
-
     public void investOnCDB(double value) {
         if (value > getBalance()) {
             System.out.println("Insuficient Balance");

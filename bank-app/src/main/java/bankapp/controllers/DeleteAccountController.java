@@ -6,10 +6,13 @@ import java.sql.SQLException;
 
 import bankapp.views.DeleteAccountView;
 import bankapp.database.Database;
+import bankapp.models.Session;
+import bankapp.models.Account;
 
 public class DeleteAccountController {
     private DeleteAccountView view;
     private Database database = new Database();
+    private Session session = Session.getInstance(null, null);
 
     public DeleteAccountController() {
         view = new DeleteAccountView();
@@ -30,8 +33,10 @@ public class DeleteAccountController {
     public void deleteAccount() throws SQLException {
         int accountNumber = view.getAccountNumber();
         
+        Account account = session.bank.getAccount(accountNumber);
+        session.bank.deleteAccount(account);
         database.deleteAccount(accountNumber);
-        view.showMessage("Usuário excluído com sucesso!");
+        view.showMessage("Conta excluída com sucesso!");
         view.dispose();
     }
 }

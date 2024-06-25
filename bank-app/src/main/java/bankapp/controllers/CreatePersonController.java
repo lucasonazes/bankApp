@@ -4,13 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import bankapp.database.Database;
 import bankapp.models.Customer;
 import bankapp.models.Employee;
 import bankapp.models.Manager;
+import bankapp.models.Session;
 import bankapp.views.CreatePersonView;
 
 public class CreatePersonController {
     private CreatePersonView view;
+    private Session session = Session.getInstance(null, null);
+    private Database database = new Database();
 
     public CreatePersonController() {
         view = new CreatePersonView();
@@ -33,15 +37,23 @@ public class CreatePersonController {
         String cpf = view.getCpf();
         String role = view.getRole();
 
-        if(role.equals("gerente")) {
+        if(session.verifyCpf(cpf)) {
+            view.showMessage("Usuário já cadastrado");
+            return;
+        }
+
+        if(role.equals("manager")) {
             Manager manager = new Manager(name, cpf);
-            manager.saveDB();
-        } else if (role.equals("funcionario")) {
+            session.bank.addPerson(manager);
+            database.addPerson(name, cpf, role);
+        } else if (role.equals("employee")) {
             Employee employee = new Employee(name, cpf);
-            employee.saveDB();
-        } else if (role.equals("cliente")) {
+            session.bank.addPerson(employee);
+            database.addPerson(name, cpf, role);
+        } else if (role.equals("customer")) {
             Customer customer = new Customer(name, cpf);
-            customer.saveDB();
+            session.bank.addPerson(customer);
+            database.addPerson(name, cpf, role);
         }
 
         view.showMessage("Usuário Cadastrado!");

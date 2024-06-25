@@ -8,12 +8,9 @@ public class CreateAccountView extends JFrame{
     private GridBagConstraints gbc;
     private JTextField user;
     private JTextField password;
-    private JTextField ownerName;
     private JTextField ownerCpf;
-    private JComboBox<String> ownerRole;
     private JButton createAccountButton;
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     public CreateAccountView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,29 +29,12 @@ public class CreateAccountView extends JFrame{
         panel.add(new JLabel("CRIAR CONTA"), gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(new JLabel("NOME USUÁRIO:"), gbc);
-
-        gbc.gridx = 2;
-        ownerName = new JTextField(10);
-        panel.add(ownerName, gbc);
-
-        gbc.gridx = 0;
         gbc.gridy = 2;
-        panel.add(new JLabel("CPF USUÁRIO:"), gbc);
+        panel.add(new JLabel("CPF PROPRIETÁRIO:"), gbc);
 
         gbc.gridx = 2;
         ownerCpf = new JTextField(10);
         panel.add(ownerCpf, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(new JLabel("CARGO USUÁRIO:"), gbc);
-
-        gbc.gridx = 2;
-        String[] fields = {"gerente", "funcionario", "cliente"};
-        ownerRole = new JComboBox(fields);
-        panel.add(ownerRole, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -91,17 +71,9 @@ public class CreateAccountView extends JFrame{
     public String getPassword() {
         return this.password.getText();
     }
-
-    public String getOwnerName() {
-        return this.ownerName.getText();
-    }
     
     public String getOwnerCpf() {
         return this.ownerCpf.getText();
-    }
-
-    public String getOwnerRole() {
-        return this.ownerRole.getSelectedItem().toString();
     }
 
     public JButton getCreateAccountButton() {

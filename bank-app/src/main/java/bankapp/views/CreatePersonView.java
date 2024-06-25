@@ -75,7 +75,17 @@ public class CreatePersonView extends JFrame{
     }
 
     public String getRole() {
-        return this.role.getSelectedItem().toString();
+        String ptRole = this.role.getSelectedItem().toString();
+        
+        if (ptRole == "gerente") {
+            ptRole = "manager";
+        } else if (ptRole == "funcionario") {
+            ptRole = "employee";
+        } else if (ptRole == "cliente") {
+            ptRole = "customer";
+        }
+
+        return ptRole;
     }
 
     public JButton getCreatePersonButton() {

@@ -6,15 +6,18 @@ import java.sql.SQLException;
 
 import bankapp.database.Database;
 import bankapp.models.CurrentAccount;
+import bankapp.models.Person;
 import bankapp.models.SavingsAccount;
 import bankapp.views.CreateAccountView;
 import bankapp.views.SetAccountTypeView;
+import bankapp.models.Session;
 
 public class CreateAccountController {
     private SetAccountTypeView setAccountTypeView;
     private CreateAccountView createAccountView = new CreateAccountView();
     private String type = null;
     private Database database = new Database();
+    private Session session = Session.getInstance(null, null);
 
     public CreateAccountController() {
         setAccountTypeView = new SetAccountTypeView();
@@ -52,21 +55,26 @@ public class CreateAccountController {
         int accountNumber = database.getLastAccountNumber() + 1;
         String user = createAccountView.getUser();
         String password = createAccountView.getPassword();
-        String ownerName = createAccountView.getOwnerName();
         String ownerCpf = createAccountView.getOwnerCpf();
-        String ownerRole = createAccountView.getOwnerRole();
+
+        if(!session.verifyCpf(ownerCpf)) {
+            createAccountView.showMessage("Usuário não existe!");
+            return;
+        }
+
+        Person person = session.getPerson(ownerCpf);
 
         if (type == "current") {
-            CurrentAccount currentAccount = new CurrentAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, 0, 0, 0, 0);
 
-            currentAccount.saveDB();
+            session.bank.addAccount(new CurrentAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0, 0, 0, 0));
+            database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta corrente criada com sucesso!");
             createAccountView.dispose();
         } else if (type == "savings") {
-            SavingsAccount savingsAccount = new SavingsAccount(accountNumber, user, password, ownerName, ownerCpf, ownerRole, 0);
 
-            savingsAccount.saveDB();
+            session.bank.addAccount(new SavingsAccount(accountNumber, user, password, person.getName(), ownerCpf, person.getRole(), 0));
+            database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta poupança criada com sucesso!");
             createAccountView.dispose();
