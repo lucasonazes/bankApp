@@ -40,7 +40,7 @@ public class LoginController {
         if (account != null) {
             Bank bank = new Bank();
             Session session = Session.getInstance(account, bank);
-            System.out.println("Nova sessão iniciada | Número da conta logada: "+session.getAccountNumber());
+            System.out.println("Nova sessão iniciada | Número da conta logada: "+session.account.getAccountNumber());
             view.showMessage("Bem vindo, "+user);
             new ManageAccountController();
         } else {

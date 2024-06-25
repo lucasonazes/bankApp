@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Session {
     private static Session instance;
-    private Account account;
+    public Account account;
     public Bank bank;
 
     private Session(Account account, Bank bank) {
@@ -21,10 +21,6 @@ public class Session {
 
     public Account getAccount() {
         return account;
-    }
-
-    public int getAccountNumber() {
-        return account.getAccountNumber();
     }
 
     public void clear() {

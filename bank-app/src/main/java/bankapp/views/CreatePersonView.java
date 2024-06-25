@@ -1,7 +1,11 @@
 package bankapp.views;
 
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
+
+import bankapp.models.Session;
 
 public class CreatePersonView extends JFrame{
     private JPanel panel;
@@ -10,6 +14,7 @@ public class CreatePersonView extends JFrame{
     private JComboBox<String>  role;
     private JTextField cpf;
     private JButton createPersonButton;
+    private Session session = Session.getInstance(null, null);
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public CreatePersonView() {
@@ -50,8 +55,23 @@ public class CreatePersonView extends JFrame{
         panel.add(new JLabel("CARGO:"), gbc);
 
         gbc.gridx = 2;
-        String[] fields = {"gerente", "funcionario", "cliente"};
-        role = new JComboBox(fields);
+
+        ArrayList<String> fields = new ArrayList<>();
+        if(session.account.getOwnerRole().equals("manager")) {
+            fields.add("funcionario");
+            fields.add("cliente");
+        } else if(session.account.getOwnerRole().equals("employee")) {
+            fields.add("cliente");
+        } else {
+            fields.add("gerente");
+            fields.add("funcionario");
+            fields.add("cliente");
+        }
+
+        String[] fieldsArray = new String[fields.size()];
+        fieldsArray = fields.toArray(fieldsArray);
+
+        role = new JComboBox(fieldsArray);
         panel.add(role, gbc);
 
         gbc.gridx = 1;
