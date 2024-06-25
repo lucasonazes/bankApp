@@ -37,6 +37,7 @@ public class DeletePersonController {
         session.bank.deletePerson(person);
         database.deletePerson(cpf);
         view.showMessage("Usuário excluído com sucesso!");
+        session.log.info("Usuário excluído");
         view.dispose();
     }
 }

@@ -6,6 +6,7 @@ public class Session {
     private static Session instance;
     public Account account;
     public Bank bank;
+    public Log log = new Log();
 
     private Session(Account account, Bank bank) {
         this.account = account;

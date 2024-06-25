@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import bankapp.models.Session;
 import bankapp.views.ManageAccountView;
 
 public class ManageAccountController {
     private ManageAccountView view;
+    private Session session = Session.getInstance(null, null);
 
     public ManageAccountController() {
         view = new ManageAccountView();
@@ -82,5 +84,6 @@ public class ManageAccountController {
 
     private void exitAccount() {
         this.view.dispose();
+        session.log.info("Usuário realizou logout");
     }
 }

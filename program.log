@@ -1,0 +1,8 @@
+Jun 25, 2024 2:32:32 AM bankapp.models.Log info
+INFO: Usuário admin realizou login
+Jun 25, 2024 2:33:10 AM bankapp.models.Log info
+INFO: Usuário cadastrado
+Jun 25, 2024 2:33:23 AM bankapp.models.Log info
+INFO: Conta corrente criada
+Jun 25, 2024 2:33:38 AM bankapp.models.Log info
+INFO: Conta poupança criada

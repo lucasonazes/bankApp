@@ -42,6 +42,7 @@ public class LoginController {
             Session session = Session.getInstance(account, bank);
             System.out.println("Nova sessão iniciada | Número da conta logada: "+session.account.getAccountNumber());
             view.showMessage("Bem vindo, "+user);
+            session.log.info("Usuário "+session.account.getUser()+" realizou login");
             new ManageAccountController();
         } else {
             view.showMessage("Senha ou usuário incorretos!");

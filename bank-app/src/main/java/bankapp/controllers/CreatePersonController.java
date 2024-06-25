@@ -57,5 +57,6 @@ public class CreatePersonController {
         }
 
         view.showMessage("Usuário Cadastrado!");
+        session.log.info("Usuário cadastrado");
     }
 }

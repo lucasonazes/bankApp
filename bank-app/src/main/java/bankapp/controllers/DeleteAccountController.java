@@ -37,6 +37,7 @@ public class DeleteAccountController {
         session.bank.deleteAccount(account);
         database.deleteAccount(accountNumber);
         view.showMessage("Conta excluída com sucesso!");
+        session.log.info("Conta excluída");
         view.dispose();
     }
 }

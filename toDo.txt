@@ -1,7 +1,5 @@
 -------------O QUE AINDA PRECISA SER FEITO----------------
 
-// Só criar conta se o usuário existir X
-// Mostrar campos de acordo com o cargo da conta
-// Mostar informações da conta na tela
 // Mostrar extrato
 // Realizar saques e depósitos
+// Realizar investimentos
