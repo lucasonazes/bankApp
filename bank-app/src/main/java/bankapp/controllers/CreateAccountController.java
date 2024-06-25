@@ -61,6 +61,10 @@ public class CreateAccountController {
             createAccountView.showMessage("Usuário não existe!");
             return;
         }
+        if (session.verifyUser(user)) {
+            createAccountView.showMessage("Nome de usuário já utilizado!");
+            return;
+        }
 
         Person person = session.getPerson(ownerCpf);
 

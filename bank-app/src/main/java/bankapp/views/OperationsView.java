@@ -41,16 +41,23 @@ public class OperationsView extends JFrame{
         String accountNumber = String.valueOf(session.account.getAccountNumber());
         panel.add(new JLabel("NÚMERO DA CONTA: "+accountNumber), gbc);
 
-        gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(new JLabel("NOME DO PROPRETÁRIO: "+session.account.getOwnerName()), gbc);
 
-        gbc.gridx = 1;
         gbc.gridy = 3;
+        panel.add(new JLabel("VALOR PRÉ-RENDIMENTO: "+session.account.getBalance()), gbc);
+
+        gbc.gridy = 4;
+        panel.add(new JLabel("RENDIMENTO TOTAL: "+session.account.getBalance()), gbc);
+
+        gbc.gridy = 5;
+        panel.add(new JLabel("CBD: "+session.account.getBalance()), gbc);
+
+        gbc.gridy = 6;
         panel.add(new JLabel("SALDO: "+session.account.getBalance()), gbc);
        
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 7;
         panel.add(new JLabel("VALOR:"), gbc);
 
         gbc.gridx = 2;
@@ -58,7 +65,7 @@ public class OperationsView extends JFrame{
         panel.add(value, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 8;
         depositButton = new JButton("DEPÓSITO");
         panel.add(depositButton, gbc);
 
@@ -70,7 +77,7 @@ public class OperationsView extends JFrame{
         investButton = new JButton("INVESTIMENTO");
         panel.add(investButton, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 9;
         gbc.gridx = 1;
         statementButton = new JButton("EXTRATO");
         panel.add(statementButton, gbc);

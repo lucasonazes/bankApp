@@ -28,6 +28,10 @@ public class Bank {
         return people;
     }
 
+    public ArrayList<Account> getAccounts() {
+        return accounts;
+    }
+
     public Account getAccount(int accountNumber) {
         for (int i = 0; i < accounts.size(); i++) {
             Account account = accounts.get(i);

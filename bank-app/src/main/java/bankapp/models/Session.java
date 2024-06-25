@@ -39,6 +39,17 @@ public class Session {
         return false;
     }
 
+    public boolean verifyUser(String user) {
+        ArrayList<Account> accounts = this.bank.getAccounts();
+
+        for (Account account : accounts) {
+            if (account.getUser().equals(user)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Person getPerson(String cpf) {
         ArrayList<Person> people = this.bank.getPeople();
 
