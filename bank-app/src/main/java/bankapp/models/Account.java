@@ -27,12 +27,14 @@ public class Account {
         this.balance = balance;
     }
 
-    public void deposit(double value) {
-        if (value <= 0) {
-            System.out.println("Invalid value.");
-        } else {
+    public boolean deposit(double value) {
+        try {
+            if (value <= 0) return false;
+            
             this.balance += value;
-            System.out.println("Your deposit was made sucessfully, your new balance is: " + this.balance);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 

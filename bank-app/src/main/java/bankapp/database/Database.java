@@ -57,7 +57,6 @@ public class Database {
         statement.executeUpdate(insert);
 
         disconnect();
-        System.out.println("Database | Usuário criado");
     }
 
     public void addAccount(String user, String password, String ownerName, String ownerCpf, String ownerRole, double balance, String accountType, double cdb, double previousIncome, double totalIncome) throws SQLException {
@@ -68,7 +67,16 @@ public class Database {
         statement.executeUpdate(insert);
 
         disconnect();
-        System.out.println("Database | Conta criada");
+    }
+
+    public void addOperation(int accountNumber, String operation, double value) throws SQLException {
+        connect();
+
+        Statement statement = connection.createStatement();
+        String insert = "INSERT INTO OPERATIONS (ACCOUNT_NUMBER, OPERATION_TYPE, OPERATION_VALUE) VALUES ("+accountNumber+",\""+operation+"\","+value+")";
+        statement.executeUpdate(insert);
+
+        disconnect();
     }
 
     public void deletePerson(String cpf) throws SQLException {
@@ -79,7 +87,6 @@ public class Database {
         statement.executeUpdate(delete);
 
         disconnect();
-        System.out.println("Database | Usuário excluído");
     }
 
     public void deleteAccount(int accountNumber) throws SQLException {
@@ -90,18 +97,16 @@ public class Database {
         statement.executeUpdate(delete);
 
         disconnect();
-        System.out.println("Database | Conta excluída");
     }
     
-    public void operation(int accountNumber, double balance) throws SQLException {
+    public void setData(int accountNumber, double balance, double cdb, double previous, double totalIncome) throws SQLException {
         connect();
 
         Statement statement = connection.createStatement();
-        String update = "UPDATE ACCOUNTS SET BALANCE = "+balance+" WHERE ACCOUNT_NUMBER = "+accountNumber;
+        String update = "UPDATE ACCOUNTS SET BALANCE = "+balance+", CDB = "+cdb+", PREVIOUS_INCOME = "+previous+", TOTAL_INCOME = "+totalIncome+" WHERE ACCOUNT_NUMBER = "+accountNumber;
         statement.executeUpdate(update);
 
         disconnect();
-        System.out.println("Database | Operação realizada");
     }
 
     public ArrayList<Account> getAccounts() throws SQLException {
@@ -225,5 +230,6 @@ public class Database {
         disconnect();
         return account;
     }
-}
 
+}
+  

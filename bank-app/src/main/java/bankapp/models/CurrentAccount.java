@@ -16,17 +16,16 @@ public class CurrentAccount extends Account {
         this.totalIncome = totalIncome;
     }
 
-    public void investOnCDB(double value) {
+    public boolean invest(double value) {
         if (value > getBalance()) {
-            System.out.println("Insuficient Balance");
+            return false;
         } else if (value <= 0) {
-            System.out.println("Invalid value.");
+            return false;
         } else {
-            double finalBalance = super.getBalance() - value;
-            super.setBalance(finalBalance);
+            super.setBalance(super.getBalance() - value);
             this.previous = value;
             this.cdb += value;
-            System.out.println("You applied " + value + " on CDB, your new CDB balance is: " + this.cdb);
+            return true;
         }
     }
 
