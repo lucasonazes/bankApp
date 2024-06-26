@@ -1,6 +1,7 @@
 package bankapp.models;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import bankapp.database.Database;
 
@@ -11,6 +12,7 @@ public class Account {
     private String ownerName;
     private String ownerCpf;
     private String ownerRole;
+    private ArrayList<Operation> operations = new ArrayList<Operation>();
 
     private double balance = 0;
     private String type;
@@ -89,5 +91,9 @@ public class Account {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setOperations(ArrayList<Operation> operations) {
+        this.operations = operations;
     }
 }

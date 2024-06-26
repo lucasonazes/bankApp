@@ -15,7 +15,7 @@ public class OperationsView extends JFrame{
     private JButton depositButton;
     private JButton withdrawButton;
     private JButton statementButton;
-    private JButton investButton;
+    private JButton investButton = new JButton("INVESTIMENTO");
     private JLabel previousIncomeLabel;
     private JLabel totalIncomeLabel;
     private JLabel cdbLabel;
@@ -25,7 +25,6 @@ public class OperationsView extends JFrame{
     public OperationsView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
@@ -99,11 +98,11 @@ public class OperationsView extends JFrame{
         if (session.account instanceof CurrentAccount) {
             gbc.gridy = 9;
             gbc.gridx = 1;
-            investButton = new JButton("INVESTIMENTO");
             panel.add(investButton, gbc);
         }
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
     public void showMessage(String message) {

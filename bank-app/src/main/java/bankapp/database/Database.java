@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import bankapp.models.Account;
@@ -12,6 +13,7 @@ import bankapp.models.CurrentAccount;
 import bankapp.models.Customer;
 import bankapp.models.Employee;
 import bankapp.models.Manager;
+import bankapp.models.Operation;
 import bankapp.models.Person;
 import bankapp.models.SavingsAccount;
 
@@ -175,6 +177,30 @@ public class Database {
         disconnect();
         System.out.println("Database | Tabela de usuários sincronizada");
         return people;
+    }
+
+    public ArrayList<Operation> getOperations(int accountNumber) throws SQLException {
+        connect();
+
+        ArrayList<Operation> operations = new ArrayList<Operation>();
+        Statement statement = connection.createStatement();
+        String select = "SELECT * FROM OPERATIONS WHERE ACCOUNT_NUMBER = "+accountNumber+" ORDER BY OPERATION_TIME DESC";
+
+        ResultSet result = statement.executeQuery(select);
+
+        while (result.next()) {
+            int id = result.getInt("OPERATION_ID");
+            int dbAccountNumber = result.getInt("ACCOUNT_NUMBER");
+            String type = result.getString("OPERATION_TYPE");
+            double value = result.getDouble("OPERATION_VALUE");
+            Timestamp timestamp = result.getTimestamp("OPERATION_TIME");
+
+            Operation operation = new Operation(id, dbAccountNumber, type, value, timestamp);
+            operations.add(operation);
+        }
+
+        disconnect();
+        return operations;
     }
 
     public int getLastAccountNumber() throws SQLException {

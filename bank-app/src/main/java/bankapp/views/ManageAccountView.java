@@ -23,7 +23,6 @@ public class ManageAccountView extends JFrame{
     public ManageAccountView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
@@ -72,6 +71,7 @@ public class ManageAccountView extends JFrame{
         panel.add(exitButton, gbc);
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
     public void showMessage(String message) {

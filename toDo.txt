@@ -1,4 +1,4 @@
 -------------O QUE AINDA PRECISA SER FEITO----------------
 
-// Mostrar extrato
+// Tela de contas e usuários existentes para o gerente
 // Simular rendimento

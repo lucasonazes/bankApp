@@ -20,7 +20,6 @@ public class CreatePersonView extends JFrame{
     public CreatePersonView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
@@ -80,6 +79,7 @@ public class CreatePersonView extends JFrame{
         panel.add(createPersonButton, gbc);
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
     public void showMessage(String message) {

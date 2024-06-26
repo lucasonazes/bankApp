@@ -12,7 +12,6 @@ public class SetAccountTypeView extends JFrame{
     public SetAccountTypeView() {
         setTitle("Santander");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         setFont(new Font("System", Font.PLAIN, 14));
         this.panel = new JPanel(new GridBagLayout());
         this.gbc = new GridBagConstraints();
@@ -32,6 +31,7 @@ public class SetAccountTypeView extends JFrame{
         panel.add(savingsAccountButton, gbc);
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
     public JButton getCurrentAccountButton() {

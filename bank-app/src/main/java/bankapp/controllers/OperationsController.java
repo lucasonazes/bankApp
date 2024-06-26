@@ -8,6 +8,7 @@ import bankapp.database.Database;
 import bankapp.models.CurrentAccount;
 import bankapp.models.Session;
 import bankapp.views.OperationsView;
+import bankapp.views.StatementView;
 
 public class OperationsController {
     private OperationsView view;
@@ -54,7 +55,11 @@ public class OperationsController {
         this.view.getStatementButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                statement();
+                try {
+                    statement();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
@@ -146,8 +151,8 @@ public class OperationsController {
         session.log.info("Investimento no valor de R$ "+value+" realizado por "+session.account.getUser());
     }
 
-    public void statement() {
-        view.showMessage("Aqui está seu extrato");
+    public void statement() throws SQLException {
         session.log.info("Extrato exibido por "+session.account.getUser());
+        new StatementView();
     }
 }
