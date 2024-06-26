@@ -16,7 +16,6 @@ public class OperationsView extends JFrame{
     private JButton withdrawButton;
     private JButton statementButton;
     private JButton investButton = new JButton("INVESTIMENTO");
-    private JLabel previousIncomeLabel;
     private JLabel totalIncomeLabel;
     private JLabel cdbLabel;
     private JLabel balanceLabel;
@@ -54,28 +53,23 @@ public class OperationsView extends JFrame{
             // Casting de Account para CurrentAccount
             CurrentAccount currentAccount = (CurrentAccount) session.account;
             double cdb = currentAccount.getCdb();
-            double previousIncome = currentAccount.getPrevious();
             double totalIncome = currentAccount.getTotalIncome();
 
             gbc.gridy = 3;
-            previousIncomeLabel = new JLabel("VALOR PRÉ-RENDIMENTO: R$ "+previousIncome);
-            panel.add(previousIncomeLabel, gbc);
-
-            gbc.gridy = 4;
             totalIncomeLabel = new JLabel("RENDIMENTO TOTAL: R$ "+totalIncome);
             panel.add(totalIncomeLabel, gbc);
 
-            gbc.gridy = 5;
+            gbc.gridy = 4;
             cdbLabel = new JLabel("CBD: R$ "+cdb);
             panel.add(cdbLabel, gbc);
         }
 
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         balanceLabel = new JLabel("SALDO: R$ "+session.account.getBalance());
         panel.add(balanceLabel, gbc);
        
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 6;
         panel.add(new JLabel("VALOR:"), gbc);
 
         gbc.gridx = 2;
@@ -83,7 +77,7 @@ public class OperationsView extends JFrame{
         panel.add(value, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 7;
         depositButton = new JButton("DEPÓSITO");
         panel.add(depositButton, gbc);
 
@@ -96,7 +90,7 @@ public class OperationsView extends JFrame{
         panel.add(statementButton, gbc);
 
         if (session.account instanceof CurrentAccount) {
-            gbc.gridy = 9;
+            gbc.gridy = 8;
             gbc.gridx = 1;
             panel.add(investButton, gbc);
         }
@@ -116,7 +110,6 @@ public class OperationsView extends JFrame{
         if(session.account instanceof CurrentAccount) {
             CurrentAccount currentAccount = (CurrentAccount) session.account;
 
-            previousIncomeLabel.setText("VALOR PRÉ-RENDIMENTO: R$ " + currentAccount.getPrevious());
             totalIncomeLabel.setText("RENDIMENTO TOTAL: R$ " + currentAccount.getTotalIncome());
             cdbLabel.setText("CDB: R$ " + currentAccount.getCdb());
         }
