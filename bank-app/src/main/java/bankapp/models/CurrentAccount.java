@@ -16,16 +16,20 @@ public class CurrentAccount extends Account {
         this.totalIncome = totalIncome;
     }
 
-    public boolean invest(double value) {
-        if (value > getBalance()) {
-            return false;
-        } else if (value <= 0) {
-            return false;
-        } else {
+    public int invest(double value) {
+        try {
+            if (value > getBalance()) {
+                return 1;
+            } else if (value <= 0) {
+                return 2;
+            }
+            
             super.setBalance(super.getBalance() - value);
             this.previous = value;
             this.cdb += value;
-            return true;
+            return 0;
+        } catch (Exception e) {
+            return -1;
         }
     }
 

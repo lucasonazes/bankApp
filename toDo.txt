@@ -1,5 +1,4 @@
 -------------O QUE AINDA PRECISA SER FEITO----------------
 
 // Mostrar extrato
-// Realizar saques e depósitos
-// Realizar investimentos
+// Simular rendimento

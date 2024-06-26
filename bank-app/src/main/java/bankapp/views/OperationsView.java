@@ -16,6 +16,10 @@ public class OperationsView extends JFrame{
     private JButton withdrawButton;
     private JButton statementButton;
     private JButton investButton;
+    private JLabel previousIncomeLabel;
+    private JLabel totalIncomeLabel;
+    private JLabel cdbLabel;
+    private JLabel balanceLabel;
     private Session session = Session.getInstance(null, null);
 
     public OperationsView() {
@@ -55,17 +59,21 @@ public class OperationsView extends JFrame{
             double totalIncome = currentAccount.getTotalIncome();
 
             gbc.gridy = 3;
-            panel.add(new JLabel("VALOR PRÉ-RENDIMENTO: "+previousIncome), gbc);
+            previousIncomeLabel = new JLabel("VALOR PRÉ-RENDIMENTO: R$ "+previousIncome);
+            panel.add(previousIncomeLabel, gbc);
 
             gbc.gridy = 4;
-            panel.add(new JLabel("RENDIMENTO TOTAL: "+totalIncome), gbc);
+            totalIncomeLabel = new JLabel("RENDIMENTO TOTAL: R$ "+totalIncome);
+            panel.add(totalIncomeLabel, gbc);
 
             gbc.gridy = 5;
-            panel.add(new JLabel("CBD: "+cdb), gbc);
+            cdbLabel = new JLabel("CBD: R$ "+cdb);
+            panel.add(cdbLabel, gbc);
         }
 
         gbc.gridy = 6;
-        panel.add(new JLabel("SALDO: "+session.account.getBalance()), gbc);
+        balanceLabel = new JLabel("SALDO: R$ "+session.account.getBalance());
+        panel.add(balanceLabel, gbc);
        
         gbc.gridx = 0;
         gbc.gridy = 7;
@@ -83,15 +91,17 @@ public class OperationsView extends JFrame{
         gbc.gridx = 1;
         withdrawButton = new JButton("SAQUE");
         panel.add(withdrawButton, gbc);
-
+        
         gbc.gridx = 2;
-        investButton = new JButton("INVESTIMENTO");
-        panel.add(investButton, gbc);
-
-        gbc.gridy = 9;
-        gbc.gridx = 1;
         statementButton = new JButton("EXTRATO");
         panel.add(statementButton, gbc);
+
+        if (session.account instanceof CurrentAccount) {
+            gbc.gridy = 9;
+            gbc.gridx = 1;
+            investButton = new JButton("INVESTIMENTO");
+            panel.add(investButton, gbc);
+        }
 
         add(panel);
     }
@@ -100,10 +110,22 @@ public class OperationsView extends JFrame{
         JOptionPane.showMessageDialog(this, message);
     }
 
+    public void updateFields() {
+        balanceLabel.setText("SALDO: R$ " + session.account.getBalance());
+        value.setText("");
+
+        if(session.account instanceof CurrentAccount) {
+            CurrentAccount currentAccount = (CurrentAccount) session.account;
+
+            previousIncomeLabel.setText("VALOR PRÉ-RENDIMENTO: R$ " + currentAccount.getPrevious());
+            totalIncomeLabel.setText("RENDIMENTO TOTAL: R$ " + currentAccount.getTotalIncome());
+            cdbLabel.setText("CDB: R$ " + currentAccount.getCdb());
+        }
+    }
+
     public double getValue() {
         String stringValue = this.value.getText();
         double finalValue = Double.parseDouble(stringValue);
-        System.out.println(finalValue);
         return finalValue;
     }
     

@@ -32,7 +32,11 @@ public class OperationsController {
         this.view.getWithdrawButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                withdraw();
+                try {
+                    withdraw();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -58,8 +62,15 @@ public class OperationsController {
     public void deposit() throws SQLException {
         double value = view.getValue();
 
-        if(!session.account.deposit(value)) {
-            view.showMessage("Valor inválido!");
+        int result = session.account.deposit(value);
+        
+        if(result == 0) {
+            System.out.print("Depósito realizado!");
+        } else if(result == 1) {
+            view.showMessage("O valor deve ser maior que 0!");
+            return;
+        } else {
+            view.showMessage("Valor inválido");
             return;
         }
 
@@ -71,33 +82,72 @@ public class OperationsController {
         }
 
         database.addOperation(session.account.getAccountNumber(), "deposit", value);
+        view.updateFields();
         view.showMessage("Depósito realizado!");
         session.log.info("Depósito no valor de R$ "+value+" realizado por "+session.account.getUser());
     }
 
-    public void withdraw() {
+    public void withdraw() throws SQLException {
+        double value = view.getValue();
+
+        int result = session.account.withdraw(value);
+
+        if(result == 0) {
+            System.out.print("Saque realizado!");
+        } else if(result == 1) {
+            view.showMessage("Saldo insuficiente!");
+            return;
+        } else if(result == 2) {
+            view.showMessage("O valor deve ser maior que 0!");
+            return;
+        } else {
+            view.showMessage("Valor inválido");
+            return;
+        }
+
+        if(session.account instanceof CurrentAccount) {
+            CurrentAccount currentAccount = (CurrentAccount) session.account;
+            database.setData(session.account.getAccountNumber(), currentAccount.getBalance(), currentAccount.getCdb(), currentAccount.getPrevious(), currentAccount.getTotalIncome());
+        } else {
+            database.setData(session.account.getAccountNumber(), session.account.getBalance(), 0, 0, 0);
+        }
+
+        database.addOperation(session.account.getAccountNumber(), "withdraw", value);
+        view.updateFields();
         view.showMessage("Saque realizado!");
-        session.log.info("Saque realizado");
+        session.log.info("Saque no valor de R$ "+value+" realizado por "+session.account.getUser());
     }
 
     public void invest() throws SQLException {
         double value = view.getValue();
 
         CurrentAccount currentAccount = (CurrentAccount) session.account;
-        if(!currentAccount.invest(value)) {
-            view.showMessage("Valor inválido!");
+        int result = currentAccount.invest(value);
+
+        if(result == 0) {
+            System.out.print("Investimento realizado!");
+        } else if(result == 1) {
+            view.showMessage("Saldo insuficiente!");
             return;
-        };
+        } else if(result == 2) {
+            view.showMessage("O valor deve ser maior que 0!");
+            return;
+        } else {
+            view.showMessage("Valor inválido");
+            return;
+        }
+
         session.account = currentAccount;
         
         database.setData(session.account.getAccountNumber(), currentAccount.getBalance(), currentAccount.getCdb(), currentAccount.getPrevious(), currentAccount.getTotalIncome());
         database.addOperation(session.account.getAccountNumber(), "investment", value);
+        view.updateFields();
         view.showMessage("Investimento realizado!");
         session.log.info("Investimento no valor de R$ "+value+" realizado por "+session.account.getUser());
     }
 
     public void statement() {
         view.showMessage("Aqui está seu extrato");
-        session.log.info("Extrato exibido");
+        session.log.info("Extrato exibido por "+session.account.getUser());
     }
 }

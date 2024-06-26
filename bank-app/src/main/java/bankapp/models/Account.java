@@ -27,25 +27,27 @@ public class Account {
         this.balance = balance;
     }
 
-    public boolean deposit(double value) {
+    public int deposit(double value) {
         try {
-            if (value <= 0) return false;
+            if (value <= 0) return 1;
             
             this.balance += value;
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+            return 0;
+        } catch (Exception e) {
+            return -1;
         }
     }
 
-    public void withDraw(double value) {
-        if (this.balance < value) {
-            System.out.println("Insuficient balance");
-        } else if (value <= 0) {
-            System.out.println("Invalid value.");
-        } else {
+    public int withdraw(double value) {
+        try {
+            if (this.balance < value) {
+                return 1;
+            } else if (value <= 0) return 2;
+
             this.balance -= value;
-            System.out.println("Your withDraw was made sucessfully, your new balance is: " + this.balance);
+            return 0;
+        } catch (Exception e) {
+            return -1;
         }
     }
 

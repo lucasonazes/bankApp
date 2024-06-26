@@ -55,6 +55,11 @@ public class LoginView extends JFrame {
         JOptionPane.showMessageDialog(this, message);
     }
 
+    public void updateFields() {
+        user.setText("");
+        password.setText("");
+    }
+
     public JButton getLoginButton() {
         return this.loginButton;
     }

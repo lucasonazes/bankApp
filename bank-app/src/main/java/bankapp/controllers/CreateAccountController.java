@@ -75,7 +75,7 @@ public class CreateAccountController {
             database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta corrente criada com sucesso!");
-            session.log.info("Conta corrente de número "+currentAccount.getAccountNumber()+" criada por "+session.account.getUser());
+            session.log.info("Conta corrente de número "+currentAccount.getAccountNumber()+" e usuário "+currentAccount.getUser()+" criada por "+session.account.getUser());
             createAccountView.dispose();
         } else if (type == "savings") {
 
@@ -84,7 +84,7 @@ public class CreateAccountController {
             database.addAccount(user, password, person.getName(), ownerCpf, person.getRole(), 0, type, 0, 0, 0);
 
             createAccountView.showMessage("Conta poupança criada com sucesso!");
-            session.log.info("Conta poupança de número "+savingsAccount.getAccountNumber()+" criada por "+session.account.getUser());
+            session.log.info("Conta poupança de número "+savingsAccount.getAccountNumber()+" e usuário "+savingsAccount.getUser()+" criada por "+session.account.getUser());
             createAccountView.dispose();
         } else createAccountView.showMessage("Erro ao criar conta");
     }
