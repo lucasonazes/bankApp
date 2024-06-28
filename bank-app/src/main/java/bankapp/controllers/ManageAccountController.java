@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import bankapp.models.Session;
 import bankapp.views.ManageAccountView;
+import bankapp.views.ShowAccountsView;
 
 public class ManageAccountController {
     private ManageAccountView view;
@@ -39,11 +40,7 @@ public class ManageAccountController {
         this.view.getDeletePerson().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    deletePerson();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
+                deletePerson();
             }
         });
 
@@ -51,6 +48,17 @@ public class ManageAccountController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteAccount();
+            }
+        });
+
+        this.view.getShowAccounts().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    showAccounts();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -74,12 +82,17 @@ public class ManageAccountController {
         new CreatePersonController();
     }
 
-    private void deletePerson() throws SQLException {
+    private void deletePerson() {
         new DeletePersonController();
     }
 
     private void deleteAccount() {
         new DeleteAccountController();
+    }
+
+    private void showAccounts() throws SQLException {
+        session.log.info("Usuário "+session.account.getUser()+" consultou contas ativas no banco");
+        new ShowAccountsView();
     }
 
     private void exitAccount() {

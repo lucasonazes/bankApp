@@ -31,28 +31,28 @@ public class StatementView extends JFrame{
         sb.append(title).append("\n");
 
         for (Operation operation : operations) {
+            String line ="__________________________________________________";
+            sb.append(line).append("\n");
+
             if (operation.getType().equals("investment")) {
 
-                String line = "Investimento no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
+                line = "Investimento no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
                 sb.append(line).append("\n");
 
             } else if (operation.getType().equals("deposit")) {
 
-                String line = "Depósito no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
+                line = "Depósito no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
                 sb.append(line).append("\n");
 
             } else if (operation.getType().equals("withdraw")) {
 
-                String line = "Saque no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
+                line = "Saque no valor de "+operation.getValue()+" realizado em "+operation.getTimestamp();
                 sb.append(line).append("\n");
 
             } else {
-                String line = "Operação não identificada no valor de "+operation.getValue()+" realizada em "+operation.getTimestamp();
+                line = "Operação não identificada no valor de "+operation.getValue()+" realizada em "+operation.getTimestamp();
                 sb.append(line).append("\n");
             }
-
-            String line ="__________________________________________________";
-            sb.append(line).append("\n");
         }
 
         textArea.setText(sb.toString());

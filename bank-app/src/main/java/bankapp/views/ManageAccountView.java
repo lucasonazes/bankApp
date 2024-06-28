@@ -16,6 +16,7 @@ public class ManageAccountView extends JFrame{
     private JButton createPerson;
     private JButton deletePerson;
     private JButton deleteButton;
+    private JButton showAccounts;
     private JButton exitButton;
     private Session session = Session.getInstance(null, null);
     private Account account = session.getAccount();
@@ -67,6 +68,11 @@ public class ManageAccountView extends JFrame{
         panel.add(deleteButton, gbc);
 
         gbc.gridy = 6;
+        showAccounts = new JButton("MOSTRAR CONTAS");
+        if (!account.getOwnerRole().equals("customer"))
+        panel.add(showAccounts, gbc);
+
+        gbc.gridy = 7;
         exitButton = new JButton("SAIR");
         panel.add(exitButton, gbc);
 
@@ -96,6 +102,10 @@ public class ManageAccountView extends JFrame{
 
     public JButton getDeleteButton() {
         return this.deleteButton;
+    }
+
+    public JButton getShowAccounts() {
+        return this.showAccounts;
     }
 
     public JButton getExitButton() {

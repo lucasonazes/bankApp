@@ -1,32 +1,8 @@
-Jun 28, 2024 5:20:25 PM bankapp.models.Log info
-INFO: Nova sessão iniciada | Número da conta logada: 6
-Jun 28, 2024 5:20:25 PM bankapp.models.Log info
-INFO: Usuário lucas realizou login
-Jun 28, 2024 5:20:32 PM bankapp.models.Log info
-INFO: Usuário lucas realizou logout
-Jun 28, 2024 5:20:41 PM bankapp.models.Log info
+Jun 28, 2024 5:47:01 PM bankapp.models.Log info
 INFO: Nova sessão iniciada | Número da conta logada: 1
-Jun 28, 2024 5:20:42 PM bankapp.models.Log info
+Jun 28, 2024 5:47:02 PM bankapp.models.Log info
 INFO: Usuário admin realizou login
-Jun 28, 2024 5:20:50 PM bankapp.models.Log info
-INFO: Conta do usuário lucas de número 6 excluída por admin
-Jun 28, 2024 5:21:24 PM bankapp.models.Log info
-INFO: Cliente Thiago Tinfre de cpf 789 cadastrado por admin
-Jun 28, 2024 5:21:35 PM bankapp.models.Log info
-INFO: Conta poupança de número 2 e usuário thiago criada por admin
-Jun 28, 2024 5:22:06 PM bankapp.models.Log info
+Jun 28, 2024 5:47:06 PM bankapp.models.Log info
+INFO: Usuário admin consultou contas ativas no banco
+Jun 28, 2024 5:47:17 PM bankapp.models.Log info
 INFO: Usuário admin realizou logout
-Jun 28, 2024 5:22:11 PM bankapp.models.Log info
-INFO: Nova sessão iniciada | Número da conta logada: 7
-Jun 28, 2024 5:22:11 PM bankapp.models.Log info
-INFO: Usuário thiago realizou login
-Jun 28, 2024 5:22:14 PM bankapp.models.Log info
-INFO: Extrato exibido por thiago
-Jun 28, 2024 5:22:22 PM bankapp.models.Log info
-INFO: Depósito no valor de R$ 40.0 realizado por thiago
-Jun 28, 2024 5:22:28 PM bankapp.models.Log info
-INFO: Saque no valor de R$ 20.0 realizado por thiago
-Jun 28, 2024 5:22:30 PM bankapp.models.Log info
-INFO: Extrato exibido por thiago
-Jun 28, 2024 5:22:33 PM bankapp.models.Log info
-INFO: Usuário thiago realizou logout
