@@ -16,6 +16,7 @@ public class OperationsView extends JFrame{
     private JButton withdrawButton;
     private JButton statementButton;
     private JButton investButton = new JButton("INVESTIMENTO");
+    private JButton incomeButton = new JButton("RENDIMENTO");
     private JLabel totalIncomeLabel;
     private JLabel cdbLabel;
     private JLabel balanceLabel;
@@ -56,11 +57,11 @@ public class OperationsView extends JFrame{
             double totalIncome = currentAccount.getTotalIncome();
 
             gbc.gridy = 3;
-            totalIncomeLabel = new JLabel("RENDIMENTO TOTAL: R$ "+totalIncome);
+            totalIncomeLabel = new JLabel("RENDIMENTO TOTAL: R$ "+String.format("%.2f",totalIncome));
             panel.add(totalIncomeLabel, gbc);
 
             gbc.gridy = 4;
-            cdbLabel = new JLabel("CBD: R$ "+cdb);
+            cdbLabel = new JLabel("CBD: R$ "+String.format("%.2f",cdb));
             panel.add(cdbLabel, gbc);
         }
 
@@ -91,8 +92,11 @@ public class OperationsView extends JFrame{
 
         if (session.account instanceof CurrentAccount) {
             gbc.gridy = 8;
-            gbc.gridx = 1;
+            gbc.gridx = 0;
             panel.add(investButton, gbc);
+
+            gbc.gridx = 2;
+            panel.add(incomeButton, gbc);
         }
 
         add(panel);
@@ -110,8 +114,8 @@ public class OperationsView extends JFrame{
         if(session.account instanceof CurrentAccount) {
             CurrentAccount currentAccount = (CurrentAccount) session.account;
 
-            totalIncomeLabel.setText("RENDIMENTO TOTAL: R$ " + currentAccount.getTotalIncome());
-            cdbLabel.setText("CDB: R$ " + currentAccount.getCdb());
+            totalIncomeLabel.setText("RENDIMENTO TOTAL: R$ " + String.format("%.2f",currentAccount.getTotalIncome()));
+            cdbLabel.setText("CDB: R$ " + String.format("%.2f",currentAccount.getCdb()));
         }
     }
 
@@ -135,5 +139,9 @@ public class OperationsView extends JFrame{
 
     public JButton getInvestButton() {
         return this.investButton;
+    }
+
+    public JButton getIncomeButton() {
+        return this.incomeButton;
     }
 }

@@ -62,6 +62,17 @@ public class OperationsController {
                 }
             }
         });
+
+        this.view.getIncomeButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    income();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
     }
 
     public void deposit() throws SQLException {
@@ -154,5 +165,37 @@ public class OperationsController {
     public void statement() throws SQLException {
         session.log.info("Extrato exibido por "+session.account.getUser());
         new StatementView();
+    }
+
+    public void income() throws SQLException {
+        int days = (int)view.getValue();
+
+        CurrentAccount currentAccount = (CurrentAccount) session.account;
+        double prev = currentAccount.getCdb();
+        int result = currentAccount.income(days);
+
+        if(result == 0) {
+            System.out.print("Rendimento ocorreu com sucesso!");
+        } else if(result == 1) {
+            view.showMessage("O valor deve ser maior que 0!");
+            return;
+        } else {
+            view.showMessage("Valor inválido");
+            return;
+        }
+
+        session.account = currentAccount;
+        double income = currentAccount.getCdb() - prev;
+
+        database.setData(session.account.getAccountNumber(), currentAccount.getBalance(), currentAccount.getCdb(), currentAccount.getPrevious(), currentAccount.getTotalIncome());
+        view.updateFields();
+
+        if (days < 2) {
+            view.showMessage(days+" dia se passou...");
+            session.log.info(days+" dia se passou e ocorreu um rendimento de R$ "+String.format("%.2f",income)+" na conta de número "+session.account.getAccountNumber()+" do usuário "+session.account.getUser());
+        } else {
+            view.showMessage(days+" dias se passaram...");
+            session.log.info(days+" dias se passaram e ocorreu um rendimento de R$ "+String.format("%.2f",income)+" na conta de número "+session.account.getAccountNumber()+" do usuário "+session.account.getUser());
+        }
     }
 }

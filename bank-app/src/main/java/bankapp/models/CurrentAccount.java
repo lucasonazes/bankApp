@@ -33,24 +33,23 @@ public class CurrentAccount extends Account {
         }
     }
 
-    public void days(int days) {
-        if (days == 1) {
-            System.out.println(days + " day has passed....");
-        } else {
-            System.out.println(days + " days has passed....");
+    public int income(int days) {
+        try {
+            if (days <= 0) {
+                return 1;
+            }
+    
+            for (int i = 1; i <= days; i++) {
+                this.cdb = this.cdb * income;
+            }
+
+            double prev = this.cdb;
+            this.cdb = this.cdb * this.income;
+            this.totalIncome += this.cdb - prev;  
+            return 0;
+        } catch (Exception e) {
+            return -1;
         }
-
-        for (int i = 1; i <= days; i++) {
-            this.cdb = this.cdb * income;
-        }
-
-        System.out.println(String.format("Previous value: %.2f", this.previous));
-        this.totalIncome += this.cdb - this.previous;
-        double income = this.cdb - this.previous;
-        System.out.println(String.format("Income: %.2f", income));
-        System.out.println(String.format("Your new CDB balance is: %.2f", this.cdb));
-
-        this.previous = this.cdb;
     }
 
     public double getCdb() {
