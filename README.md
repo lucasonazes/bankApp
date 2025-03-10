@@ -1,1 +1,1 @@
-# Banking application in C for financial management.
+# Banking application in java for financial management.
