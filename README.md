@@ -1,6 +1,6 @@
-# BankApp
+# Bank-app
 
-BankApp is a Java-based banking application for financial management. It provides a graphical user interface (GUI) for managing accounts, users, and banking operations, including deposits, withdrawals, investments, and account statements.
+Bank-app is a Java-based banking application for financial management. It provides a graphical user interface (GUI) for managing accounts, users, and banking operations, including deposits, withdrawals, investments, and account statements.
 
 ## Features
 
